@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { productsRoute } = require('./routes')
+const { usersRoute, productsRoute } = require('./routes')
 
 const app = express()
 
@@ -10,6 +10,7 @@ app.get('/status', (req, res) => {
     res.status(200).json({ message: 'Server running...' })
 })
 
+app.use('/users', usersRoute)
 app.use('/products', productsRoute)
 
 module.exports = app
