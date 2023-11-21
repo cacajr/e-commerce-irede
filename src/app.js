@@ -1,6 +1,10 @@
 const express = require('express')
 
-const { usersRoute, productsRoute } = require('./routes')
+const { 
+    usersRoute, 
+    productsRoute, 
+    loginRoute
+} = require('./routes')
 
 const app = express()
 
@@ -12,5 +16,6 @@ app.get('/status', (req, res) => {
 
 app.use('/users', usersRoute)
 app.use('/products', productsRoute)
+app.use('/login', loginRoute)
 
 module.exports = app

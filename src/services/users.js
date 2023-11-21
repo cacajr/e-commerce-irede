@@ -1,9 +1,8 @@
 const { validateUser } = require('./validations/userValidation')
 const { usersModel } = require('../models')
 
-const create = async (newUser) => {
-    const errorMessage = validateUser(newUser)
-
+const create = async (user) => {
+    const errorMessage = validateUser(user)
     if(errorMessage) {
         return { 
             statusCode: 400, 
@@ -12,8 +11,8 @@ const create = async (newUser) => {
         }
     }
 
-    const user = await usersModel.findByEmail(newUser.email)
-    if(!user) {
+    const userRegistered = await usersModel.findByEmail(user.email)
+    if(userRegistered) {
         return { 
             statusCode: 422, 
             message: 'User already exists!', 
@@ -21,11 +20,11 @@ const create = async (newUser) => {
         }
     }
 
-    const products = await usersModel.create(user)
+    const newUser = await usersModel.create(user)
     return { 
         statusCode: 201, 
         message: '', 
-        value: products
+        value: newUser
     }
 }
 
