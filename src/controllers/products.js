@@ -13,13 +13,10 @@ const listProducts = async (req, res) => {
 }
 
 const listProductsByProperties = async (req, res) => {
-    const { name = '', category = '' } = req.query
+    const queryParams = req.query
 
     const products = await productsService.
-                        listProductsByProperties(
-                            name, 
-                            category
-                        )
+                        listProductsByProperties(queryParams)
 
     if(products.message) {
         return res.status(products.statusCode).json({

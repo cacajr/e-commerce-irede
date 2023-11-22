@@ -11,6 +11,15 @@ const matchUser = async (user) => {
     return userMatched.rows[0]
 }
 
+const findById = async (id) => {
+    const user = await pgConnection.query(
+        'SELECT id_user, name, email FROM public.users WHERE id_user = $1;',
+        [id]
+    )
+
+    return user.rows[0]
+}
+
 const findByEmail = async (email) => {
     const user = await pgConnection.query(
         'SELECT id_user, name, email FROM public.users WHERE email = $1;',
@@ -23,16 +32,17 @@ const findByEmail = async (email) => {
 const create = async (user) => {
     const { email, name, password } = user
 
-    const products = await pgConnection.query(
+    const newUser = await pgConnection.query(
         'INSERT INTO public.users (name, email, password) VALUES ($1, $2, $3) RETURNING id_user, name, email',
         [name, email, password]
     )
 
-    return products.rows[0]
+    return newUser.rows[0]
 }
 
 module.exports = {
     matchUser,
+    findById,
     findByEmail,
     create
 }

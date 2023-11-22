@@ -10,12 +10,9 @@ const listProducts = async () => {
     }
 }
 
-const listProductsByProperties = async (name, category) => {
+const listProductsByProperties = async (queryParams) => {
     const products = await productsModel.
-                        listProductsByNameAndCategory(
-                            name, 
-                            category
-                        )
+                        listProductsByNameAndCategory(queryParams)
 
     return { 
         statusCode: 200, 

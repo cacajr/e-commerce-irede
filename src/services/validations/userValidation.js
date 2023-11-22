@@ -1,6 +1,10 @@
 const validateName = (name) => {
     if(!name) {
-        return 'Name is required!'
+        return 'User name is required!'
+    }
+
+    if(typeof name !== 'string') {
+        return 'User name must be a string!'
     }
 
     return ''
@@ -8,13 +12,17 @@ const validateName = (name) => {
 
 const validateEmail = (email) => {
     if(!email) {
-        return 'Email is required!'
+        return 'User email is required!'
+    }
+
+    if(typeof email !== 'string') {
+        return 'User email must be a string!'
     }
 
     // ref: https://masteringjs.io/tutorials/fundamentals/email-regex
     const emailIsValid = /[^\s@]+@[^\s@]+\.[^\s@]+/.test(email)
     if(!emailIsValid) {
-        return 'Email invalid!'
+        return 'User email invalid!'
     }
 
     return ''
@@ -22,11 +30,15 @@ const validateEmail = (email) => {
 
 const validatePassword = (password) => {
     if(!password) {
-        return 'Password is required!'
+        return 'User password is required!'
+    }
+
+    if(typeof password !== 'string') {
+        return 'User password must be a string!'
     }
 
     if(password.length < 5) {
-        return 'Password invalid!'
+        return 'User password must have at least 5 characters!'
     }
 
     return ''
