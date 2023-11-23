@@ -38,20 +38,19 @@ const create = async (sale) => {
     }
 
     // * TODO: this must be a transaction
-    // const { idSale } = await salesModel.create(sale)
+    const { idSale } = await salesModel.create(sale)
 
     const newUsersProductsPromises = sale.products.map((product) => {
         const userProduct = {
             idUser: sale.idUser,
             idProduct: product.idProduct,
-            idSale: 1,//idSale,
+            idSale: idSale,
             quantity: product.quantity,
             price: product.price
         }
-        console.log(userProduct.price)
-        // return usersProductsModel.create(userProduct)
+        return usersProductsModel.create(userProduct)
     })
-    // await Promise.all(newUsersProductsPromises)
+    await Promise.all(newUsersProductsPromises)
     // * ------------------------------------------------------
 
     return { 
