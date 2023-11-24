@@ -8,7 +8,7 @@ const {
 
 const listSalesByUserId = async (idUser) => {
     const idUserInt = parseInt(idUser)
-    if(!idUserInt) {
+    if(!idUserInt && idUserInt !== 0) {
         return { 
             statusCode: 400, 
             message: 'User id param must be a number!', 

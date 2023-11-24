@@ -19,6 +19,10 @@ const validateProducts = (products) => {
         return 'Products is required!'
     }
 
+    if(products.length < 1) {
+        return 'Products list is empty!'
+    }
+
     if(!Array.isArray(products)) {
         return 'Products must be an array!'
     }
