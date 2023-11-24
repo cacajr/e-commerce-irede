@@ -1,4 +1,4 @@
-const pgConnection = require('../databases/pgConnection')
+// const pgConnection = require('../databases/pgConnection')
 
 const create = async (userProduct) => {
     const { idUser, idProduct, idSale, quantity, price } = userProduct
