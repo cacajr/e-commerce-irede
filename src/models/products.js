@@ -28,18 +28,8 @@ const listProductsByNameAndCategory = async (queryParams) => {
     return products.rows
 }
 
-const listProductsPurchasedByUserId = async (idUser) => {
-    const products = await pgConnection.query(
-        'SELECT p.id_product AS "idProduct", up.id_sale AS "idSale", p.picture, p.name, p.category, up.quantity, CAST(up.price AS float) FROM public.products AS p JOIN public.users_products AS up ON p.id_product = up.id_product JOIN public.sales AS s ON up.id_sale = s.id_sale WHERE up.id_user = $1;',
-        [idUser]
-    )
-
-    return products.rows
-}
-
 module.exports = {
     listProducts,
     findById,
-    listProductsByNameAndCategory,
-    listProductsPurchasedByUserId
+    listProductsByNameAndCategory
 }
