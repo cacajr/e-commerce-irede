@@ -1,16 +1,42 @@
-// const pgConnection = require('../databases/pgConnection')
+const {
+    Product, 
+    Sale,
+    UserProduct
+} = require('../databases/models')
 
 const create = async (userProduct) => {
-    const { idUser, idProduct, idSale, quantity, price } = userProduct
+    const sale = await UserProduct.create(userProduct)
 
-    const sale = await pgConnection.query(
-        'INSERT INTO public.users_products (id_user, id_product, id_sale, quantity, price) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
-        [idUser, idProduct, idSale, quantity, price]
-    )
+    return sale
+}
 
-    return sale.rows[0]
+const listUserProductByUserId = async (idUser) => {
+    const userProducts = await UserProduct.findAll({
+        attributes: {
+            exclude: ['idUser', 'idSale', 'idProduct']
+        },
+        where: {
+            idUser
+        },
+        include: [
+            {
+                model: Product,
+                as: 'product',
+                attributes: {
+                    exclude: ['quantity', 'price']
+                }
+            },
+            {
+                model: Sale,
+                as: 'sale'
+            }
+        ]
+    })
+    
+    return userProducts
 }
 
 module.exports = {
-    create
+    create,
+    listUserProductByUserId
 }

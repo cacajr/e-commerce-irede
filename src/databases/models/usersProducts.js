@@ -45,8 +45,14 @@ module.exports = (sequelize, DataTypes) => {
             otherKey: 'idProduct',
         })
 
+        usersProducts.belongsTo(models.Product, {
+            as: 'product',
+            foreignKey: 'idProduct'
+        })
+
         usersProducts.belongsTo(models.Sale, {
-            foreignKey: 'idSale', as: 'sale'
+            as: 'sale',
+            foreignKey: 'idSale'
         })
     }
 

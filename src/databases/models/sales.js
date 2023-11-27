@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         date: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true // this attribute contains default value in DB
         },
         status: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true // this attribute contains default value in DB
         }
     },
     {

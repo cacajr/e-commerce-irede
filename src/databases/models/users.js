@@ -25,5 +25,13 @@ module.exports = (sequelize, DataTypes) => {
         underscored: true   // convert all camel case field in snake in query
     })
   
+    Users.associate = (models) => {
+        Users.belongsToMany(models.Product, { 
+            through: 'UserProduct', 
+            foreignKey: 'idProduct',
+            otherKey: 'idUser',
+        })
+    }
+
     return Users
 }
