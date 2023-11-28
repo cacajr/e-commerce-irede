@@ -4,12 +4,6 @@ const {
     UserProduct
 } = require('../databases/models')
 
-const create = async (userProduct) => {
-    const sale = await UserProduct.create(userProduct)
-
-    return sale
-}
-
 const listUserProductByUserId = async (idUser) => {
     const userProducts = await UserProduct.findAll({
         attributes: {
@@ -34,6 +28,12 @@ const listUserProductByUserId = async (idUser) => {
     })
     
     return userProducts
+}
+
+const create = async (userProduct) => {
+    const sale = await UserProduct.create(userProduct)
+
+    return sale
 }
 
 module.exports = {

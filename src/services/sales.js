@@ -26,17 +26,27 @@ const listSalesByUserId = async (idUser) => {
     }
 
     const userProductsInfo = await usersProductsModel.listUserProductByUserId(idUser)
-    const uniqueSalesId = [
+    const uniqueSales = [
         ...new Map(userProductsInfo.map(
             userProduct => [userProduct.sale.idSale, userProduct.sale]
         )).values()
     ]
-    const sales = uniqueSalesId.map((sale) => {
+    
+    const sales = uniqueSales.map((sale) => {
         const userProductsBySaleId = userProductsInfo.filter(
             (userProduct) => userProduct.sale.idSale === sale.idSale
         )
         const productsInfo = userProductsBySaleId.map(
-            (userProduct) => userProduct.product
+            (userProduct) => {
+                return {
+                    idProduct: userProduct.product.idProduct,
+                    picture: userProduct.product.picture,
+                    name: userProduct.product.name,
+                    category: userProduct.product.category,
+                    quantity: userProduct.quantity,
+                    price: userProduct.price
+                }
+            }
         )
         return {
             idSale: sale.idSale,
