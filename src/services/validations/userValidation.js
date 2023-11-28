@@ -37,8 +37,8 @@ const validatePassword = (password) => {
         return 'User password must be a string!'
     }
 
-    if(password.length < 5) {
-        return 'User password must have at least 5 characters!'
+    if(password.length < 5 || password.length > 8) {
+        return 'User password must have at least 5 characters and a maximum of 8!'
     }
 
     return ''
